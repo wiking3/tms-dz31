@@ -1,0 +1,364 @@
+JOB lint-code
+
+Running with gitlab-runner 18.8.0 (9ffb4aa0)
+  on GITLABRUN1 9PsLbIgrJ, system ID: s_68c25013ec4f
+Preparing the "docker" executor 00:05
+Using Docker executor with image python:3.11-slim ...
+Using effective pull policy of [always] for container python:3.11-slim
+Authenticating with credentials from /root/.docker/config.json
+Pulling docker image python:3.11-slim ...
+Using docker image sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2 for python:3.11-slim with digest python@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2 ...
+Preparing environment 00:01
+Using effective pull policy of [always] for container sha256:b29dbaf6434533caafbc1b2d0e89582590089cdf13ffa662ec82d8c3075e4ab2
+Running on runner-9pslbigrj-project-1-concurrent-0 via GITLABRUN1...
+Getting source from Git repository 00:01
+Gitaly correlation ID: 01KG7KVTXZ2FXSSPX753S8G8GH
+Fetching changes with git depth set to 20...
+Reinitialized existing Git repository in /builds/root/tmsdz31/.git/
+Created fresh repository.
+Checking out 9a548561 as detached HEAD (ref is main)...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script 00:07
+Using effective pull policy of [always] for container python:3.11-slim
+Using docker image sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2 for python:3.11-slim with digest python@sha256:5be45dbade29bebd6886af6b438fd7e0b4eb7b611f39ba62b430263f82de36d2 ...
+$ pip install pylint
+Collecting pylint
+  Downloading pylint-4.0.4-py3-none-any.whl.metadata (12 kB)
+Collecting astroid<=4.1.dev0,>=4.0.2 (from pylint)
+  Downloading astroid-4.0.3-py3-none-any.whl.metadata (4.4 kB)
+Collecting dill>=0.3.6 (from pylint)
+  Downloading dill-0.4.1-py3-none-any.whl.metadata (10 kB)
+Collecting isort!=5.13,<8,>=5 (from pylint)
+  Downloading isort-7.0.0-py3-none-any.whl.metadata (11 kB)
+Collecting mccabe<0.8,>=0.6 (from pylint)
+  Downloading mccabe-0.7.0-py2.py3-none-any.whl.metadata (5.0 kB)
+Collecting platformdirs>=2.2 (from pylint)
+  Downloading platformdirs-4.5.1-py3-none-any.whl.metadata (12 kB)
+Collecting tomlkit>=0.10.1 (from pylint)
+  Downloading tomlkit-0.14.0-py3-none-any.whl.metadata (2.8 kB)
+Downloading pylint-4.0.4-py3-none-any.whl (536 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.4/536.4 kB 4.9 MB/s eta 0:00:00
+Downloading astroid-4.0.3-py3-none-any.whl (276 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 276.4/276.4 kB 10.4 MB/s eta 0:00:00
+Downloading dill-0.4.1-py3-none-any.whl (120 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 120.0/120.0 kB 8.7 MB/s eta 0:00:00
+Downloading isort-7.0.0-py3-none-any.whl (94 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 94.7/94.7 kB 7.8 MB/s eta 0:00:00
+Downloading mccabe-0.7.0-py2.py3-none-any.whl (7.3 kB)
+Downloading platformdirs-4.5.1-py3-none-any.whl (18 kB)
+Downloading tomlkit-0.14.0-py3-none-any.whl (39 kB)
+Installing collected packages: tomlkit, platformdirs, mccabe, isort, dill, astroid, pylint
+Successfully installed astroid-4.0.3 dill-0.4.1 isort-7.0.0 mccabe-0.7.0 platformdirs-4.5.1 pylint-4.0.4 tomlkit-0.14.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[notice] A new release of pip is available: 24.0 -> 25.3
+[notice] To update, run: pip install --upgrade pip
+$ pylint app.py
+************* Module app
+app.py:1:50: C0303: Trailing whitespace (trailing-whitespace)
+app.py:6:40: C0303: Trailing whitespace (trailing-whitespace)
+app.py:13:20: C0303: Trailing whitespace (trailing-whitespace)
+app.py:18:26: C0303: Trailing whitespace (trailing-whitespace)
+app.py:24:0: C0304: Final newline missing (missing-final-newline)
+app.py:24:0: W0311: Bad indentation. Found 5 spaces, expected 4 (bad-indentation)
+app.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+app.py:1:0: E0401: Unable to import 'flask' (import-error)
+app.py:7:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
+-----------------------------------
+Your code has been rated at 0.00/10
+Cleaning up project directory and file based variables 00:01
+ERROR: Job failed: exit code 1
+
+
+JOB build-kaniko
+
+
+Running with gitlab-runner 18.8.0 (9ffb4aa0)
+  on GITLABRUN1 9PsLbIgrJ, system ID: s_68c25013ec4f
+Preparing the "docker" executor 00:03
+Using Docker executor with image gcr.io/kaniko-project/executor:debug ...
+Using effective pull policy of [always] for container gcr.io/kaniko-project/executor:debug
+Pulling docker image gcr.io/kaniko-project/executor:debug ...
+Using docker image sha256:2562c4fe551399514277ffff7dcca9a3b1628c4ea38cb017d7286dc6ea52f4cd for gcr.io/kaniko-project/executor:debug with digest gcr.io/kaniko-project/executor@sha256:2562c4fe551399514277ffff7dcca9a3b1628c4ea38cb017d7286dc6ea52f4cd ...
+Preparing environment 00:01
+Using effective pull policy of [always] for container sha256:b29dbaf6434533caafbc1b2d0e89582590089cdf13ffa662ec82d8c3075e4ab2
+Running on runner-9pslbigrj-project-1-concurrent-0 via GITLABRUN1...
+Getting source from Git repository 00:01
+Gitaly correlation ID: 01KG7KWAWG92BS4J9ZW7FHDXET
+Fetching changes with git depth set to 20...
+Reinitialized existing Git repository in /builds/root/tmsdz31/.git/
+Created fresh repository.
+Checking out 9a548561 as detached HEAD (ref is main)...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script 02:43
+Using effective pull policy of [always] for container gcr.io/kaniko-project/executor:debug
+Using docker image sha256:2562c4fe551399514277ffff7dcca9a3b1628c4ea38cb017d7286dc6ea52f4cd for gcr.io/kaniko-project/executor:debug with digest gcr.io/kaniko-project/executor@sha256:2562c4fe551399514277ffff7dcca9a3b1628c4ea38cb017d7286dc6ea52f4cd ...
+$ mkdir -p /kaniko/.docker
+$ echo ${CI_PROJECT_DIR}
+/builds/root/tmsdz31
+$ echo "{\"auths\":{\"$REGISTRY\":{\"username\":\"$DOCKER_USER\",\"password\":\"$DOCKER_TOKEN\"}}}" > /kaniko/.docker/config.json
+$ /kaniko/executor \ # collapsed multi-line command
+INFO[0000] Retrieving image manifest python:3.10        
+INFO[0000] Retrieving image python:3.10 from registry index.docker.io 
+INFO[0002] Built cross stage deps: map[]                
+INFO[0002] Retrieving image manifest python:3.10        
+INFO[0002] Returning cached image manifest              
+INFO[0002] Executing 0 build triggers                   
+INFO[0002] Building stage 'python:3.10' [idx: '0', base-idx: '-1'] 
+INFO[0002] Unpacking rootfs as cmd COPY requirements.txt requirements.txt requires it. 
+INFO[0140] WORKDIR /app                                 
+INFO[0140] Cmd: workdir                                 
+INFO[0140] Changed working directory to /app            
+INFO[0140] Creating directory /app with uid -1 and gid -1 
+INFO[0140] Taking snapshot of files...                  
+INFO[0140] COPY requirements.txt requirements.txt       
+INFO[0140] Taking snapshot of files...                  
+INFO[0140] RUN pip install --no-cache-dir -r requirements.txt 
+INFO[0140] Initializing snapshotter ...                 
+INFO[0140] Taking snapshot of full filesystem...        
+INFO[0148] Cmd: /bin/sh                                 
+INFO[0148] Args: [-c pip install --no-cache-dir -r requirements.txt] 
+INFO[0148] Running: [/bin/sh -c pip install --no-cache-dir -r requirements.txt] 
+Collecting Werkzeug==3.0.3
+  Downloading werkzeug-3.0.3-py3-none-any.whl (227 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 227.3/227.3 kB 3.8 MB/s eta 0:00:00
+Collecting Jinja2==3.1.4
+  Downloading jinja2-3.1.4-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.3/133.3 kB 12.1 MB/s eta 0:00:00
+Collecting Flask==3.0.3
+  Downloading flask-3.0.3-py3-none-any.whl (101 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.7/101.7 kB 11.9 MB/s eta 0:00:00
+Collecting requests
+  Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.7/64.7 kB 11.6 MB/s eta 0:00:00
+Collecting MarkupSafe>=2.1.1
+  Downloading markupsafe-3.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (20 kB)
+Collecting itsdangerous>=2.1.2
+  Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Collecting blinker>=1.6.2
+  Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Collecting click>=8.1.3
+  Downloading click-8.3.1-py3-none-any.whl (108 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.3/108.3 kB 11.7 MB/s eta 0:00:00
+Collecting charset_normalizer<4,>=2
+  Downloading charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 153.6/153.6 kB 12.2 MB/s eta 0:00:00
+Collecting urllib3<3,>=1.21.1
+  Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 131.6/131.6 kB 11.3 MB/s eta 0:00:00
+Collecting idna<4,>=2.5
+  Downloading idna-3.11-py3-none-any.whl (71 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 71.0/71.0 kB 11.6 MB/s eta 0:00:00
+Collecting certifi>=2017.4.17
+  Downloading certifi-2026.1.4-py3-none-any.whl (152 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 152.9/152.9 kB 11.4 MB/s eta 0:00:00
+Installing collected packages: urllib3, MarkupSafe, itsdangerous, idna, click, charset_normalizer, certifi, blinker, Werkzeug, requests, Jinja2, Flask
+Successfully installed Flask-3.0.3 Jinja2-3.1.4 MarkupSafe-3.0.3 Werkzeug-3.0.3 blinker-1.9.0 certifi-2026.1.4 charset_normalizer-3.4.4 click-8.3.1 idna-3.11 itsdangerous-2.2.0 requests-2.32.5 urllib3-2.6.3
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[notice] A new release of pip is available: 23.0.1 -> 25.3
+[notice] To update, run: pip install --upgrade pip
+INFO[0153] Taking snapshot of full filesystem...        
+INFO[0156] COPY . .                                     
+INFO[0156] Taking snapshot of files...                  
+INFO[0156] CMD ["python","app.py"]                      
+INFO[0156] EXPOSE 5000                                  
+INFO[0156] Cmd: EXPOSE                                  
+INFO[0156] Adding exposed port: 5000/tcp                
+INFO[0156] Pushing image to wiking3/tms-dz31:tmsdz31-9a548561 
+INFO[0161] Pushed index.docker.io/wiking3/tms-dz31@sha256:f98008e6d23ba2334dd504972e07b480b831b3f38c5380ba78143c538a0dec19 
+Cleaning up project directory and file based variables 00:01
+Job succeeded
+
+JOB deploy-job
+
+.
+Running with gitlab-runner 18.8.0 (9ffb4aa0)
+  on GITLABRUN1 9PsLbIgrJ, system ID: s_68c25013ec4f
+Preparing the "docker" executor 00:03
+Using Docker executor with image alpine ...
+Using effective pull policy of [always] for container alpine
+Authenticating with credentials from /root/.docker/config.json
+Pulling docker image alpine ...
+Using docker image sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 for alpine with digest alpine@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 ...
+Preparing environment 00:01
+Using effective pull policy of [always] for container sha256:b29dbaf6434533caafbc1b2d0e89582590089cdf13ffa662ec82d8c3075e4ab2
+Running on runner-9pslbigrj-project-1-concurrent-0 via GITLABRUN1...
+Getting source from Git repository 00:01
+Gitaly correlation ID: 01KG7M1KJ0NKNM2C6W8EJ84318
+Fetching changes with git depth set to 20...
+Reinitialized existing Git repository in /builds/root/tmsdz31/.git/
+Created fresh repository.
+Checking out 9a548561 as detached HEAD (ref is main)...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script 00:09
+Using effective pull policy of [always] for container alpine
+Using docker image sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 for alpine with digest alpine@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 ...
+$ apk update && apk add --no-cache openssh
+v3.23.3-2-g6a40493f58e [https://dl-cdn.alpinelinux.org/alpine/v3.23/main]
+v3.23.3-17-g8f46596f6de [https://dl-cdn.alpinelinux.org/alpine/v3.23/community]
+OK: 27568 distinct packages available
+( 1/10) Installing openssh-keygen (10.2_p1-r0)
+( 2/10) Installing ncurses-terminfo-base (6.5_p20251123-r0)
+( 3/10) Installing libncursesw (6.5_p20251123-r0)
+( 4/10) Installing libedit (20251016.3.1-r0)
+( 5/10) Installing openssh-client-common (10.2_p1-r0)
+( 6/10) Installing openssh-client-default (10.2_p1-r0)
+( 7/10) Installing openssh-sftp-server (10.2_p1-r0)
+( 8/10) Installing openssh-server-common (10.2_p1-r0)
+( 9/10) Installing openssh-server (10.2_p1-r0)
+(10/10) Installing openssh (10.2_p1-r0)
+Executing busybox-1.37.0-r30.trigger
+OK: 14.9 MiB in 26 packages
+$ mkdir -p ~/.ssh
+$ echo ${CI_PROJECT_DIR}
+/builds/root/tmsdz31
+$ echo "$SSH_KEY"
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAYEAwlTE1suLOeur179CmjCWLRo30EhO9GQ99hDy8OZHGdQ6HUYARoy3
+HaXbx2QHjEUJzmGRLeoYvv/a+p+XleCxi2UAQXw81fBrhV9Qnas+oUuJNUdGmA4zzs++4f
+pqoPY+uShZVaU5lQXQQKq6gneb2aIY+q872EPzbZeESYIhCvdsVy4wNh25lSlyFQz2G2+u
+gT73OTD1yukOWcF7GM4iXGMuDDkY/fMw2U9BBaLg1ppqOzPMyCoq8KnzfbsdI9uQst2vtf
+VREALYLWhuFnrgd0V0X0eii3ibbYajpaR2BkXo3762EMtAW1BEuf27FIDQh0zFh6ONOrPF
+UKocv9hMQeXiRzjwJsTgEdmfGufzMxp/8ZEfXu3XAdi8qPIJbYVHwN1keaUE2548F8R/jz
+cl8BFsWAYG16z3bimWNJzTzyNC0Efnt6Wl8LIYAGheKuNhjbIKuHQUw3prxlY5lFY9LWSI
+5ul6Y70ruiVykKaFtYWHZWMsNKk4+TYrzjTORbbvAAAFkMJrA47CawOOAAAAB3NzaC1yc2
+EAAAGBAMJUxNbLiznrq9e/Qpowli0aN9BITvRkPfYQ8vDmRxnUOh1GAEaMtx2l28dkB4xF
+Cc5hkS3qGL7/2vqfl5XgsYtlAEF8PNXwa4VfUJ2rPqFLiTVHRpgOM87PvuH6aqD2PrkoWV
+WlOZUF0ECquoJ3m9miGPqvO9hD822XhEmCIQr3bFcuMDYduZUpchUM9htvroE+9zkw9crp
+DlnBexjOIlxjLgw5GP3zMNlPQQWi4NaaajszzMgqKvCp8327HSPbkLLdr7X1URAC2C1obh
+Z64HdFdF9Hoot4m22Go6WkdgZF6N++thDLQFtQRLn9uxSA0IdMxYejjTqzxVCqHL/YTEHl
+4kc48CbE4BHZnxrn8zMaf/GRH17t1wHYvKjyCW2FR8DdZHmlBNuePBfEf483JfARbFgGBt
+es924pljSc088jQtBH57elpfCyGABoXirjYY2yCrh0FMN6a8ZWOZRWPS1kiObpemO9K7ol
+cpCmhbWFh2VjLDSpOPk2K840zkW27wAAAAMBAAEAAAGAFl5a41KTQxEtOuyesPrjaRZPKG
+APs906A0dDf5aHcUysJ88f8amkMPsfcjMXFKlPDfzNu5g/ovShHcodpmMybJYtUlxc8E9N
+QRE4nqgl0bvNHl8xnAe+ejwQKm4rCejDot0nHfmictSJengXId9nXBoRgAGIWkYau27+YN
+ZkEUwWTMQEnqYLRO/RXDpICzPEGsfG/e6fIZfJTsGQ9sj7duD1CEkmPE0FlBilpmLE407r
+ksb398O1ekrwZnTm+h1Sti+2jbk9Et8aDwBMuQDhNYYct2oSlIO1yBIU3jdwXChQDGCbf9
+AGagc3YqJUas8B/xhUghusLERB9HuJPblKKMAEcxEA620SwSvt38YvRKWmZFvy+Up9kp/v
+pr4EfYb30k9H5y4qU079GmjSFkjGQXruTyAdJoWYUAR4g6Gx8Stf16LCq74/fU7FtB+Aga
+SAtoxoy1iui/a0x/jIqFP4bb2HQNPAe2h/Qn2oEkwC8qcAZqgiWbDcE2ZZgMklbCJpAAAA
+wAdwjFoCMKWmH5zu6KnVfKlzukV2uvD7pu6awoKOAW539N/mFOjbEwRjC9tLA68CS0q8N0
+moKZ0h6UfniqRcxRmpyRvtpiEP22g9+5DCCUYeRs6kBF8oQ5UWDtEYdyGP0GBRV+fUz5+v
+SE5mvBTAnHr92U2eTTkOBPlfe6kIlU2f9ZVPvnymmkn8RpOvGj4uwJ30jz4HFa8eYohHw4
+CHSPNVjFjBqTK0SGEWfCpanKBnQPAnfvFGjqWWPewxONK0nwAAAMEA1gXtoEY+RMAnIs4d
+Fioy/R0eQiSZxwzuPvUTWRFerjctN1F36kpBDgeyPu0R1Uc4BCnG4XtLjrOUzAJntZnjSR
+6ug9wBsQTK4PVyvjxhpcgaBl2pnQhb3aTGBGnyWjYw8LNtWDA4K+GCLLU9R3k/kQMu0RPC
++rh3ZIvJQLBJVui0/cCFpLxEpqJmqqyqM+kCwk7FpYiVyTs8V2JJP2yTEWdozVbON/iimQ
+rc8hrGS5OsTaNNXrr7wQPBJbpveYcjAAAAwQDochtVDIoTDSHLjKCGaKbVrsU2gV1Qs39D
+Ub5xDnB7+QHWFP3LQWfBG4C2+5AKETI59cthQA7/Hg6I4WJ89mnl5H5IgA4yq7/HFyHF1c
+h/7mwMrDb31qfdZU7XYOueglfHhKVRjVz5/UIQ9QVidxpXRytHcxNqS3jG84nHeOzJPsjE
+uBq8Mn4MRy1iiup7uRmKizBzAoIQ/3CiiebzR+mObtJaMp+2C5jacO6OISWvWzxgI4/oNB
+wFhDSA3UCEc8UAAAAXZ2l0bGFiLXJ1bm5lckB1MjJnaXRsYWIBAgME
+-----END OPENSSH PRIVATE KEY-----
+$ echo "$SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+$ cd ~/.ssh/
+$ chmod 600 id_rsa
+$ eval "$(ssh-agent -s)"
+Agent pid 22
+$ ssh-add id_rsa
+Identity added: id_rsa (gitlab-runner@u22gitlab)
+$ ssh $SSH_OPTS ${SSH_USER}@${HOST_IP} " docker stop http-server || true && docker rm http-server || true && docker run -d -p 5000:5000 --name http-server ${REPO}:${IMAGE_TAG}"
+Warning: Permanently added '192.168.100.117' (ED25519) to the list of known hosts.
+http-server
+http-server
+Unable to find image 'wiking3/tms-dz31:tmsdz31-9a548561' locally
+tmsdz31-9a548561: Pulling from wiking3/tms-dz31
+2ca1bfae7ba8: Already exists
+82e18c5e1c15: Already exists
+be442a7e0d6f: Already exists
+26d823e3848f: Already exists
+396e598771b7: Already exists
+9984d24eefd5: Already exists
+ecf7c25b6a09: Already exists
+fe79e339deaf: Pulling fs layer
+1280b71c6580: Pulling fs layer
+63739b3a7bdb: Pulling fs layer
+987fbf734d53: Pulling fs layer
+987fbf734d53: Waiting
+fe79e339deaf: Verifying Checksum
+fe79e339deaf: Download complete
+fe79e339deaf: Pull complete
+1280b71c6580: Verifying Checksum
+1280b71c6580: Download complete
+1280b71c6580: Pull complete
+987fbf734d53: Verifying Checksum
+987fbf734d53: Download complete
+63739b3a7bdb: Verifying Checksum
+63739b3a7bdb: Download complete
+63739b3a7bdb: Pull complete
+987fbf734d53: Pull complete
+Digest: sha256:f98008e6d23ba2334dd504972e07b480b831b3f38c5380ba78143c538a0dec19
+Status: Downloaded newer image for wiking3/tms-dz31:tmsdz31-9a548561
+e00830fccc79fdd650d1a96b76116226649c04a85ae9d3b862fa8f71634a1095
+Cleaning up project directory and file based variables 00:01
+Job succeeded
+
+
+JOB healtcheck
+
+
+Running with gitlab-runner 18.8.0 (9ffb4aa0)
+  on GITLABRUN1 9PsLbIgrJ, system ID: s_68c25013ec4f
+Preparing the "docker" executor 00:02
+Using Docker executor with image alpine/curl:8.17.0 ...
+Using effective pull policy of [always] for container alpine/curl:8.17.0
+Authenticating with credentials from /root/.docker/config.json
+Pulling docker image alpine/curl:8.17.0 ...
+Using docker image sha256:b07e591c7a4dd4aae2145694ab856bbee3037503bf8aab4eb149fa417033d373 for alpine/curl:8.17.0 with digest alpine/curl@sha256:b07e591c7a4dd4aae2145694ab856bbee3037503bf8aab4eb149fa417033d373 ...
+Preparing environment 00:01
+Using effective pull policy of [always] for container sha256:b29dbaf6434533caafbc1b2d0e89582590089cdf13ffa662ec82d8c3075e4ab2
+Running on runner-9pslbigrj-project-1-concurrent-0 via GITLABRUN1...
+Getting source from Git repository 00:01
+Gitaly correlation ID: 01KG7M2322GZGQ4111AJ02HMR3
+Fetching changes with git depth set to 20...
+Reinitialized existing Git repository in /builds/root/tmsdz31/.git/
+Created fresh repository.
+Checking out 9a548561 as detached HEAD (ref is main)...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script 00:10
+Using effective pull policy of [always] for container alpine/curl:8.17.0
+Using docker image sha256:b07e591c7a4dd4aae2145694ab856bbee3037503bf8aab4eb149fa417033d373 for alpine/curl:8.17.0 with digest alpine/curl@sha256:b07e591c7a4dd4aae2145694ab856bbee3037503bf8aab4eb149fa417033d373 ...
+$ echo "Waiting" # collapsed multi-line command
+Waiting
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   946 100   946   0     0 163356     0  --:--:-- --:--:-- --:--:-- 189200
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <title>INDEX HTML </title> -->
+    <title>NetworkTool General</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .main {
+            margin-left: 30px
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1> Network tool </h1>
+<form action="/contact" method="post" class="form-contact">
+<p><label>Ping:  </label><input type="text" name="username" value="" requied />
+<p><label>Traceroute: </label><input type="text" name="email"    value="" requied />
+<p><textarea name="message" rows=7 cols=40></textarea>
+<p><input type="submit" value="Send" />
+</form>
+<ul>
+<li> Установка</li>
+<li> Первое приложение</li>
+<li> Обратная связь</li>
+</ul>
+         </div>
+        </div>
+</body>
+</html>
+Cleaning up project directory and file based variables 00:01
+Job succeeded
+

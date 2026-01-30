@@ -1,0 +1,94 @@
+stages:          # List of stages for jobs, and their order of execution
+  - lint 
+  - build
+  - deploy
+  - healthcheck
+
+.common_tags: &common_tags
+  tags:
+    - runner1
+
+
+variables:
+  DOCKER_USER: wiking3
+  REPO: wiking3/tms-dz31
+  IMAGE_TAG: tmsdz31-$CI_COMMIT_SHORT_SHA
+  PRJ_NAME: dz31
+  SSH_USER: gitlab-runner
+  REGISTRY: https://index.docker.io/v1/
+  PRJ_DIR: /app
+  HOST_IP: 192.168.100.117
+
+ 
+
+lint-code:
+  stage: lint  
+  image: python:3.11-slim
+  before_script: 
+    - pip install pylint
+  script:
+    - pylint app.py
+  allow_failure: true
+  tags:
+    - runner1 
+
+
+build-kaniko:
+  stage: build
+  image: 
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo ${CI_PROJECT_DIR}
+    - echo "{\"auths\":{\"$REGISTRY\":{\"username\":\"$DOCKER_USER\",\"password\":\"$DOCKER_TOKEN\"}}}" > /kaniko/.docker/config.json
+    - |
+      /kaniko/executor \
+        --context "${CI_PROJECT_DIR}" \
+        --dockerfile "${CI_PROJECT_DIR}/Dockerfile" \
+        --destination "${REPO}:${IMAGE_TAG}"
+  tags:
+    - runner1 
+
+deploy-job:
+  stage: deploy
+  image: alpine
+  needs: ["build-kaniko"]
+  variables:
+    SSH_OPTS: -i id_rsa -o StrictHostKeyChecking=no
+  before_script:
+    - apk update && apk add --no-cache openssh
+    - mkdir -p ~/.ssh
+    - echo ${CI_PROJECT_DIR}
+    - echo "$SSH_KEY"
+    - echo "$SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    #- cp "$SSH_KEY"  id_rsa
+    - cd ~/.ssh/
+    - chmod 600 id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add id_rsa
+  script:
+    - ssh $SSH_OPTS ${SSH_USER}@${HOST_IP} "
+        docker stop http-server || true &&
+        docker rm http-server || true &&
+        docker run -d -p 5000:5000 --name http-server ${REPO}:${IMAGE_TAG}"
+
+
+healthcheck:
+  stage: healthcheck
+  image: alpine/curl:8.17.0
+  needs: ["deploy-job"]
+  script:
+  - |
+    echo "Waiting"
+    sleep 10
+    curl -f http://${HOST_IP}:5000/
+  tags:
+    - runner1
+
+
+
+
+
+
+
